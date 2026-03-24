@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test reconversion professionnelle — AG Consulting Formations Alsace</title>
+<meta name="description" content="Êtes-vous prêt(e) à changer de cap professionnel ? 7 questions pour mieux comprendre votre situation et savoir comment avancer.">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f7f7f5;color:#1a1a1a;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:2rem 1rem}
+  .card{background:#fff;border-radius:16px;box-shadow:0 2px 24px rgba(0,0,0,.08);max-width:640px;width:100%;padding:2rem 2rem 1.75rem}
+  .brand{display:flex;align-items:center;gap:.6rem;margin-bottom:1.75rem;padding-bottom:1.25rem;border-bottom:1px solid #efefed}
+  .brand-dot{width:10px;height:10px;border-radius:50%;background:#2E5FA3;flex-shrink:0}
+  .brand-name{font-size:13px;font-weight:600;color:#2E5FA3;letter-spacing:.02em}
+  .brand-tagline{font-size:12px;color:#888;margin-left:auto}
+  .qz-title{font-size:20px;font-weight:600;color:#1a1a1a;line-height:1.4;margin-bottom:.5rem}
+  .qz-sub{font-size:14px;color:#666;line-height:1.6;margin-bottom:1.5rem}
+  .progress-wrap{margin-bottom:1.5rem}
+  .progress-bar{width:100%;height:4px;background:#efefed;border-radius:2px;overflow:hidden;margin-bottom:.5rem}
+  .progress-fill{height:100%;background:#2E5FA3;border-radius:2px;transition:width .4s ease}
+  .step-counter{font-size:12px;color:#aaa;letter-spacing:.04em}
+  .question{font-size:16px;font-weight:600;color:#1a1a1a;line-height:1.5;margin-bottom:1.25rem}
+  .options{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.5rem}
+  .option{display:flex;align-items:flex-start;gap:.75rem;padding:.875rem 1rem;border:1px solid #e8e8e4;border-radius:10px;cursor:pointer;transition:border-color .15s,background .15s;background:#fff}
+  .option:hover{border-color:#b0c4e8;background:#f5f8ff}
+  .option.selected{border-color:#2E5FA3;background:#f0f5ff}
+  .opt-letter{font-size:13px;font-weight:600;color:#bbb;min-width:18px;padding-top:1px;flex-shrink:0}
+  .option.selected .opt-letter{color:#2E5FA3}
+  .opt-text{font-size:14px;color:#333;line-height:1.5}
+  .nav{display:flex;justify-content:space-between;align-items:center}
+  .btn{padding:.6rem 1.25rem;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;border:1px solid #ddd;background:#fff;color:#444;transition:background .15s}
+  .btn:hover{background:#f5f5f3}
+  .btn.primary{background:#2E5FA3;color:#fff;border-color:#2E5FA3}
+  .btn.primary:hover{background:#1F3864}
+  .btn:disabled{opacity:.35;cursor:default;pointer-events:none}
+  .result{display:none;animation:fadeIn .4s ease}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  .score-bar{display:flex;gap:3px;margin-bottom:1.25rem}
+  .score-seg{height:6px;flex:1;border-radius:2px;background:#efefed}
+  .score-seg.active{background:#2E5FA3}
+  .result-tag{display:inline-block;font-size:12px;font-weight:600;padding:3px 10px;border-radius:6px;margin-bottom:1rem;letter-spacing:.02em}
+  .result-title{font-size:20px;font-weight:600;color:#1a1a1a;margin-bottom:.75rem;line-height:1.4}
+  .result-desc{font-size:14px;color:#555;line-height:1.7;margin-bottom:1.25rem}
+  .result-points{margin-bottom:1.5rem}
+  .result-point{display:flex;align-items:flex-start;gap:.5rem;font-size:13px;color:#555;line-height:1.5;margin-bottom:.5rem}
+  .result-point::before{content:"→";color:#2E5FA3;font-weight:600;flex-shrink:0;margin-top:1px}
+  .cta-block{background:#f5f8ff;border-radius:12px;padding:1.25rem;margin-top:.5rem}
+  .cta-label{font-size:11px;font-weight:600;letter-spacing:.08em;color:#aaa;text-transform:uppercase;margin-bottom:.5rem}
+  .cta-text{font-size:14px;color:#555;margin-bottom:1rem;line-height:1.6}
+  .wa-preview{background:#fff;border:1px solid #e8e8e4;border-radius:8px;padding:.75rem 1rem;margin-bottom:1rem;font-size:13px;color:#666;line-height:1.5;font-style:italic}
+  .wa-preview-label{font-style:normal;font-weight:600;color:#333;display:block;margin-bottom:.35rem;font-size:12px}
+  .cta-btn{display:flex;align-items:center;justify-content:center;gap:.6rem;width:100%;padding:.9rem 1.25rem;background:#25D366;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;text-decoration:none;transition:background .15s}
+  .cta-btn:hover{background:#1aab52}
+  .cta-btn svg{width:20px;height:20px;flex-shrink:0}
+  .restart{margin-top:1rem;font-size:13px;color:#aaa;text-align:center;cursor:pointer;text-decoration:underline}
+  .restart:hover{color:#666}
+  @media(max-width:480px){
+    body{padding:1rem .5rem}
+    .card{padding:1.5rem 1.25rem 1.25rem}
+    .qz-title{font-size:18px}
+  }
+</style>
+</head>
+<body>
+<div class="card">
+
+  <div class="brand">
+    <div class="brand-dot"></div>
+    <span class="brand-name">AG Consulting Formations Alsace</span>
+    <span class="brand-tagline">Test gratuit · 3 min</span>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz-view">
+    <div class="qz-title">Êtes-vous prêt(e) à changer de cap professionnel ?</div>
+    <div class="qz-sub">7 questions pour mieux comprendre votre situation et savoir comment avancer concrètement.</div>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div></div>
+      <div class="step-counter" id="step-counter">Question 1 / 7</div>
+    </div>
+    <div class="question" id="question-text"></div>
+    <div class="options" id="options-container"></div>
+    <div class="nav">
+      <button class="btn" id="btn-prev" onclick="prev()" disabled>← Précédent</button>
+      <button class="btn primary" id="btn-next" onclick="next()" disabled>Suivant →</button>
+    </div>
+  </div>
+
+  <!-- RÉSULTAT -->
+  <div class="result" id="result-view">
+    <div class="score-bar" id="score-bar"></div>
+    <div class="result-tag" id="result-tag"></div>
+    <div class="result-title" id="result-title"></div>
+    <div class="result-desc" id="result-desc"></div>
+    <div class="result-points" id="result-points"></div>
+    <div class="cta-block">
+      <div class="cta-label">Prochaine étape</div>
+      <div class="cta-text" id="cta-text"></div>
+      <div class="wa-preview">
+        <span class="wa-preview-label">Message pré-rempli pour vous :</span>
+        <span id="wa-preview-text"></span>
+      </div>
+      <a class="cta-btn" id="wa-btn" href="#" target="_blank">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Contacter Aurélie sur WhatsApp
+      </a>
+    </div>
+    <div class="restart" onclick="restart()">↺ Recommencer le test</div>
+  </div>
+
+</div>
+
+<script>
+const TEL = "33768768746";
+
+const questions = [
+  {
+    q: "Depuis combien de temps pensez-vous à changer quelque chose dans votre vie professionnelle ?",
+    opts: [
+      "C'est une réflexion récente, quelques semaines tout au plus",
+      "Depuis plusieurs mois, mais ça reste flou",
+      "Depuis plus d'un an — ça revient régulièrement",
+      "Depuis si longtemps que je ne m'en souviens plus"
+    ]
+  },
+  {
+    q: "Comment décririez-vous votre état au travail en ce moment ?",
+    opts: [
+      "Ça se passe bien, j'aimerais juste progresser",
+      "Je tourne en rond, j'ai du mal à me motiver",
+      "Je suis fatigué(e) et souvent démotivé(e)",
+      "Je suis épuisé(e), ça commence à impacter ma santé"
+    ]
+  },
+  {
+    q: "Le dimanche soir, vous êtes plutôt…",
+    opts: [
+      "Serein(e), le lundi ne me pose pas de problème",
+      "Un peu tendu(e) à l'idée de la semaine",
+      "Stressé(e), vous redoutez les prochains jours",
+      "En pleine angoisse — vous n'arrivez plus à déconnecter"
+    ]
+  },
+  {
+    q: "Avez-vous une idée de ce vers quoi vous aimeriez aller ?",
+    opts: [
+      "Oui, j'ai une direction assez claire",
+      "J'ai des pistes mais rien de concret",
+      "Je cherche activement sans trouver",
+      "Je n'ai aucune idée et ça m'angoisse"
+    ]
+  },
+  {
+    q: "Qu'est-ce qui vous retient de passer à l'action ?",
+    opts: [
+      "Pas grand chose — je suis déjà en démarche",
+      "La peur de me tromper ou de tout perdre",
+      "Le manque d'énergie et de temps",
+      "Tout à la fois : la peur, l'argent, le regard des autres"
+    ]
+  },
+  {
+    q: "Si vous deviez résumer votre situation en un mot, ce serait…",
+    opts: ["Curiosité", "Questionnement", "Frustration", "Épuisement"]
+  },
+  {
+    q: "Qu'attendez-vous en priorité d'un accompagnement professionnel ?",
+    opts: [
+      "Confirmer une direction que j'entrevois déjà",
+      "Clarifier mes compétences et explorer mes options",
+      "Trouver une sortie à ma situation actuelle",
+      "Retrouver de l'énergie et redonner du sens à mon parcours"
+    ]
+  }
+];
+
+const profiles = [
+  {
+    min: 7, max: 11,
+    tag: "Phase d'exploration",
+    tagColor: "#0F6E56", tagBg: "rgba(15,110,86,.12)",
+    title: "Vous explorez — et c'est déjà un bon début.",
+    desc: "Vous n'êtes pas encore dans l'urgence, mais quelque chose vous pousse à vous interroger sur votre avenir professionnel. C'est souvent à ce stade — avant que la fatigue s'installe vraiment — qu'un accompagnement est le plus efficace. Vous avez l'énergie et la clarté pour construire quelque chose de solide.",
+    points: [
+      "Identifier ce qui vous attire vraiment avant de vous fixer",
+      "Poser les bases d'un projet cohérent avec qui vous êtes aujourd'hui",
+      "Prendre de l'avance sur votre évolution, sans précipitation"
+    ],
+    cta: "Un premier échange gratuit nous permettra de voir ensemble si le bilan de compétences est l'outil qu'il vous faut à ce stade.",
+    wa: "Bonjour Aurélie, je viens de faire votre test en ligne. Mon résultat : \"Phase d'exploration\". Je commence à réfléchir à mon évolution professionnelle et j'aimerais qu'on en parle lors d'un premier rendez-vous gratuit."
+  },
+  {
+    min: 12, max: 17,
+    tag: "Au carrefour",
+    tagColor: "#185FA5", tagBg: "rgba(24,95,165,.1)",
+    title: "Vous êtes au carrefour — les signaux sont là.",
+    desc: "Vous ressentez clairement qu'il faut changer quelque chose, mais vous manquez de structure pour passer à l'action. Vous tournez probablement en rond entre plusieurs options, sans pouvoir trancher. Ce n'est pas un manque de courage — c'est un manque de méthode. C'est exactement ce que le bilan de compétences apporte.",
+    points: [
+      "Sortir du flou en nommant précisément ce qui ne va plus",
+      "Identifier vos compétences transférables et vos vraies motivations",
+      "Construire un projet professionnel réaliste, pas juste une idée"
+    ],
+    cta: "C'est le moment idéal pour structurer votre réflexion. Je vous propose un premier rendez-vous gratuit pour faire le point ensemble.",
+    wa: "Bonjour Aurélie, je viens de faire votre test en ligne. Mon résultat : \"Au carrefour\". Je tourne en rond depuis un moment et j'ai du mal à trouver une direction claire. J'aimerais échanger avec vous lors d'un premier rendez-vous gratuit."
+  },
+  {
+    min: 18, max: 23,
+    tag: "Prêt(e) à agir",
+    tagColor: "#854F0B", tagBg: "rgba(133,79,11,.1)",
+    title: "Vous êtes prêt(e) à agir — ne perdez pas ce momentum.",
+    desc: "Tout s'aligne pour que vous passiez à l'action : la motivation est là, la prise de conscience aussi. Ce qui vous manque, c'est un cadre solide pour transformer cette énergie en projet concret. Sans structure, cette envie de changement risque de s'essouffler. C'est exactement pour ça que le bilan de compétences existe.",
+    points: [
+      "Transformer vos envies de changement en projet professionnel concret",
+      "Valider vos pistes avec des outils sérieux, pas des intuitions seules",
+      "Passer à l'action avec un plan clair et réalisable"
+    ],
+    cta: "Vous avez l'élan — utilisons-le. Un premier rendez-vous gratuit pour définir ensemble comment avancer rapidement.",
+    wa: "Bonjour Aurélie, je viens de faire votre test en ligne. Mon résultat : \"Prêt(e) à agir\". Je suis motivé(e) pour changer de cap mais j'ai besoin d'un cadre pour me lancer vraiment. J'aimerais prendre un premier rendez-vous gratuit avec vous."
+  },
+  {
+    min: 24, max: 28,
+    tag: "Signal d'alarme",
+    tagColor: "#A32D2D", tagBg: "rgba(163,45,45,.1)",
+    title: "Votre situation mérite une attention rapide.",
+    desc: "Votre niveau d'épuisement et de blocage est élevé. Continuer seul(e) dans cette situation risque de l'aggraver. Vous avez besoin non seulement de trouver une nouvelle direction, mais d'abord de reprendre pied. Le bilan de compétences peut être l'espace dont vous avez besoin pour souffler, voir clair et reconstruire.",
+    points: [
+      "Prendre du recul sur votre situation sans jugement ni pression",
+      "Retrouver une direction avant que l'épuisement ne s'installe davantage",
+      "Être accompagné(e) par quelqu'un qui comprend ce que vous traversez"
+    ],
+    cta: "Ne restez pas seul(e) avec ça. Un premier échange gratuit et confidentiel — sans engagement — pour voir comment avancer ensemble.",
+    wa: "Bonjour Aurélie, je viens de faire votre test en ligne. Mon résultat : \"Signal d'alarme\". Ma situation professionnelle est difficile en ce moment et j'ai besoin d'aide pour y voir clair. J'aimerais qu'on puisse échanger lors d'un premier rendez-vous gratuit."
+  }
+];
+
+let current = 0;
+let answers = new Array(questions.length).fill(null);
+
+function render() {
+  const q = questions[current];
+  document.getElementById('step-counter').textContent = `Question ${current + 1} / ${questions.length}`;
+  document.getElementById('progress').style.width = `${((current + 1) / questions.length) * 100}%`;
+  document.getElementById('question-text').textContent = q.q;
+  const c = document.getElementById('options-container');
+  c.innerHTML = '';
+  ['A','B','C','D'].forEach((letter, i) => {
+    const d = document.createElement('div');
+    d.className = 'option' + (answers[current] === i ? ' selected' : '');
+    d.innerHTML = `<span class="opt-letter">${letter}</span><span class="opt-text">${q.opts[i]}</span>`;
+    d.onclick = () => select(i);
+    c.appendChild(d);
+  });
+  document.getElementById('btn-prev').disabled = current === 0;
+  document.getElementById('btn-next').disabled = answers[current] === null;
+  document.getElementById('btn-next').textContent = current === questions.length - 1 ? 'Voir mon profil →' : 'Suivant →';
+}
+
+function select(i) {
+  answers[current] = i;
+  document.querySelectorAll('.option').forEach((el, idx) => el.classList.toggle('selected', idx === i));
+  document.getElementById('btn-next').disabled = false;
+}
+
+function next() {
+  if (answers[current] === null) return;
+  if (current < questions.length - 1) { current++; render(); }
+  else showResult();
+}
+
+function prev() {
+  if (current > 0) { current--; render(); }
+}
+
+function showResult() {
+  const score = answers.reduce((s, a) => s + (a + 1), 0);
+  const profile = profiles.find(p => score >= p.min && score <= p.max) || profiles[profiles.length - 1];
+  document.getElementById('quiz-view').style.display = 'none';
+  const rv = document.getElementById('result-view');
+  rv.style.display = 'block';
+  const sb = document.getElementById('score-bar');
+  sb.innerHTML = '';
+  const filled = Math.round((score / (questions.length * 4)) * 10);
+  for (let i = 0; i < 10; i++) {
+    const s = document.createElement('div');
+    s.className = 'score-seg' + (i < filled ? ' active' : '');
+    sb.appendChild(s);
+  }
+  const tag = document.getElementById('result-tag');
+  tag.textContent = profile.tag;
+  tag.style.color = profile.tagColor;
+  tag.style.background = profile.tagBg;
+  document.getElementById('result-title').textContent = profile.title;
+  document.getElementById('result-desc').textContent = profile.desc;
+  document.getElementById('result-points').innerHTML = profile.points.map(p => `<div class="result-point">${p}</div>`).join('');
+  document.getElementById('cta-text').textContent = profile.cta;
+  document.getElementById('wa-preview-text').textContent = profile.wa;
+  document.getElementById('wa-btn').href = `https://wa.me/${TEL}?text=${encodeURIComponent(profile.wa)}`;
+}
+
+function restart() {
+  current = 0;
+  answers = new Array(questions.length).fill(null);
+  document.getElementById('result-view').style.display = 'none';
+  document.getElementById('quiz-view').style.display = 'block';
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
